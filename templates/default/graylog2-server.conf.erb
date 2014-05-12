@@ -1,6 +1,6 @@
 # If you are running more than one instances of graylog2-server you have to select one of these
 # instances as master. The master will perform some periodical tasks that non-masters won't perform.
-is_master = <%= node[:graylog2][:server_is_master] %>
+is_master = <%= node['rackspace_graylog2']['server_is_master'] %>
 
 # The auto-generated node ID will be stored in this file and read after restarts. It is a good idea
 # to use an absolute file path here if you are starting graylog2-server from init scripts or similar.
@@ -8,20 +8,20 @@ node_id_file = /etc/graylog2-server-node-id
 
 # You MUST set a secret to secure/pepper the stored user passwords here. Use at least 64 characters.
 # Generate one by using for example: pwgen -s 96
-password_secret = <%= node[:graylog2][:server_password_secret] %>
+password_secret = <%= node['rackspace_graylog2']['server_password_secret'] %>
 # the default root user is named 'admin'
 # root_username = admin
 # You MUST specify a hash password for the root user (which you only need to initially set up the
 # system and in case you lose connectivity to your authentication backend)
 # Create one by using for example: echo -n yourpassword | shasum -a 256
 # and put the resulting hash value into the following line
-root_password_sha2 = <%= node[:graylog2][:server_root_password_sha2] %>
+root_password_sha2 = <%= node['rackspace_graylog2']['server_root_password_sha2'] %>
 
 # Set plugin directory here (relative or absolute)
 plugin_dir = plugin
 
 # REST API listen URI. Must be reachable by other graylog2-server nodes if you run a cluster.
-rest_listen_uri = <%= node[:graylog2][:server_rest_listen_uri] %>
+rest_listen_uri = <%= node['rackspace_graylog2']['server_rest_listen_uri'] %>
 # REST API transport address. Defaults to first non-loopback IPv4 system address and port 12900.
 # This will be promoted in the cluster discovery APIs and other nodes may try to connect on this
 # address. (see rest_listen_uri)
@@ -31,11 +31,11 @@ rest_listen_uri = <%= node[:graylog2][:server_rest_listen_uri] %>
 # pay attention to the working directory of the server, maybe use an absolute path here
 #elasticsearch_config_file = /etc/graylog2-elasticsearch.yml
 
-elasticsearch_max_docs_per_index = <%= node[:graylog2][:server_max_docs_per_index] %>
+elasticsearch_max_docs_per_index = <%= node['rackspace_graylog2']['server_max_docs_per_index'] %>
 
 # How many indices do you want to keep?
 # elasticsearch_max_number_of_indices*elasticsearch_max_docs_per_index=total number of messages in your setup
-elasticsearch_max_number_of_indices = <%= node[:graylog2][:server_max_indexes] %>
+elasticsearch_max_number_of_indices = <%= node['rackspace_graylog2']['server_max_indexes'] %>
 
 # Decide what happens with the oldest indices when the maximum number of indices is reached.
 # The following strategies are availble:
@@ -44,8 +44,8 @@ elasticsearch_max_number_of_indices = <%= node[:graylog2][:server_max_indexes] %
 retention_strategy = delete
 
 # How many ElasticSearch shards and replicas should be used per index? Note that this only applies to newly created indices.
-elasticsearch_shards = <%= node[:graylog2][:server_shards] %>
-elasticsearch_replicas = <%= node[:graylog2][:server_replicas] %>
+elasticsearch_shards = <%= node['rackspace_graylog2']['server_shards'] %>
+elasticsearch_replicas = <%= node['rackspace_graylog2']['server_replicas'] %>
 
 elasticsearch_index_prefix = graylog2
 
@@ -111,15 +111,15 @@ processor_wait_strategy = blocking
 ring_size = 1024
 
 # MongoDB Configuration
-mongodb_useauth = <%= node[:graylog2][:server_mongodb_auth] %>
-mongodb_user = <%= node[:graylog2][:server_mongodb_username] %>
-mongodb_password = <%= node[:graylog2][:server_mongodb_password] %>
-mongodb_host = <%= node[:graylog2][:server_mongodb_host] %>
-<% if node[:graylog2][:server_mongodb_replica_set] && !node[:graylog2][:server_mongodb_replica_set].empty? %>
-mongodb_replica_set = <%= node[:graylog2][:server_mongodb_replica_set] %>
+mongodb_useauth = <%= node['rackspace_graylog2']['server_mongodb_auth'] %>
+mongodb_user = <%= node['rackspace_graylog2']['server_mongodb_username'] %>
+mongodb_password = <%= node['rackspace_graylog2']['server_mongodb_password'] %>
+mongodb_host = <%= node['rackspace_graylog2']['server_mongodb_host'] %>
+<% if node['rackspace_graylog2']['server_mongodb_replica_set'] && !node['rackspace_graylog2']['server_mongodb_replica_set'].empty? %>
+mongodb_replica_set = <%= node['rackspace_graylog2']['server_mongodb_replica_set'] %>
 <% end %>
-mongodb_database = <%= node[:graylog2][:server_mongodb_database] %>
-mongodb_port = <%= node[:graylog2][:server_mongodb_port] %>
+mongodb_database = <%= node['rackspace_graylog2']['server_mongodb_database'] %>
+mongodb_port = <%= node['rackspace_graylog2']['server_mongodb_port'] %>
 
 # Raise this according to the maximum connections your MongoDB server can handle if you encounter MongoDB connection problems.
 mongodb_max_connections = 100

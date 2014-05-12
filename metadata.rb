@@ -1,19 +1,19 @@
-name                                    'graylog2'
-maintainer                              'Stephan Oudmaijer'
-maintainer_email                        'soudmaijer@gmail.com'
-license                                 'Apache License, Version 2.0'
-description                             'Installs/Configures graylog2'
-long_description                        IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version                                 '1.1.0'
+name 'rackspace_graylog2'
+maintainer 'Stephan Oudmaijer'
+maintainer_email 'soudmaijer@gmail.com'
+license 'Apache License, Version 2.0'
+description 'Installs/Configures graylog2'
+long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
+version '1.1.0'
 
-recipe 'graylog2::default',             'Installs and configures a graylog2 server'
-recipe 'graylog2::server',              'Installs and configures a graylog2 server with Java, ElasticSearch and single MongoDB instance'
-recipe 'graylog2::server-only',         'Installs and configures a graylog2 server'
-recipe 'graylog2::web-interface',       'Installs and configures a graylog2 web interface with Java'
-recipe 'graylog2::web-interface-only',  'Installs and configures a graylog2 web interface'
-recipe 'graylog2::nginx',               'Installs and configures nginx as reverse proxy for the web interface'
+recipe 'rackspace_graylog2::default',             'Installs and configures a graylog2 server'
+recipe 'rackspace_graylog2::server',              'Installs and configures a graylog2 server with Java, ElasticSearch and single MongoDB instance'
+recipe 'rackspace_graylog2::server-only',         'Installs and configures a graylog2 server'
+recipe 'rackspace_graylog2::web-interface',       'Installs and configures a graylog2 web interface with Java'
+recipe 'rackspace_graylog2::web-interface-only',  'Installs and configures a graylog2 web interface'
+recipe 'rackspace_graylog2::nginx',               'Installs and configures nginx as reverse proxy for the web interface'
 
-%w{ ubuntu debian redhat centos }.each do |os|
+%w(ubuntu debian redhat centos).each do |os|
   supports os
 end
 

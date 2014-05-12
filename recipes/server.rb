@@ -16,14 +16,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-include_recipe "java"
+include_recipe 'java'
 
 # mongo single instance
-include_recipe "mongodb::10gen_repo"
-include_recipe "mongodb::default"
+include_recipe 'mongodb::10gen_repo'
+include_recipe 'mongodb::default'
 
 # elasticsearch, clustername set in override attributes
-include_recipe "elasticsearch"
-include_recipe "elasticsearch::plugins"
+include_recipe 'elasticsearch'
+include_recipe 'elasticsearch::plugins'
 
-include_recipe "graylog2::server-only"
+include_recipe 'rackspace_graylog2::server-only'

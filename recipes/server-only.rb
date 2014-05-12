@@ -16,48 +16,47 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-include_recipe "ark"
+include_recipe 'ark'
 
-graylog2_server_service_name='graylog2-server'
-graylog2_server_package = "https://github.com/Graylog2/graylog2-server/releases/download/#{node[:graylog2][:server_version]}/graylog2-server-#{node[:graylog2][:server_version]}.tgz"
+graylog2_server_service_name = 'graylog2-server'
+graylog2_server_package = "https://github.com/Graylog2/graylog2-server/releases/download/#{node['rackspace_graylog2']['server_version']}/graylog2-server-#{node['rackspace_graylog2']['server_version']}.tgz"
 
-group node[:graylog2][:server_group] do
+group node['rackspace_graylog2']['server_group'] do
   action :create
 end
 
-user node[:graylog2][:server_user] do
-  group node[:graylog2][:server_group]
-  supports :manage_home => true
+user node['rackspace_graylog2']['server_user'] do
+  group node['rackspace_graylog2']['server_group']
+  supports manage_home: true
   comment "#{graylog2_server_service_name} user"
   action :create
 end
 
-ark "#{graylog2_server_service_name}" do
+ark graylog2_server_service_name do
   url graylog2_server_package
-  home_dir node[:graylog2][:server_home]
-  version node[:graylog2][:server_version]
-  owner node[:graylog2][:server_user]
-  group node[:graylog2][:server_group]
+  home_dir node['rackspace_graylog2']['server_home']
+  version node['rackspace_graylog2']['server_version']
+  owner node['rackspace_graylog2']['server_user']
+  group node['rackspace_graylog2']['server_group']
   notifies :restart, "service[#{graylog2_server_service_name}]", :delayed
 end
 
 # Create graylog2.conf
-template "/etc/graylog2.conf" do
-  source "graylog2-server.conf.erb"
+template '/etc/graylog2.conf' do
+  source 'graylog2-server.conf.erb'
   mode 0644
   notifies :restart, "service[#{graylog2_server_service_name}]", :delayed
 end
 
 # Create init.d script
 template "/etc/init.d/#{graylog2_server_service_name}" do
-  source "graylog2-server.init.erb"
+  source 'graylog2-server.init.erb'
   mode 0755
   notifies :restart, "service[#{graylog2_server_service_name}]", :delayed
 end
 
 # Service resource
-service "#{graylog2_server_service_name}" do
-  supports :restart => true, :status => true
+service graylog2_server_service_name do
+  supports restart: true, status: true
   action :enable
 end
-

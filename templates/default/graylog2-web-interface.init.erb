@@ -1,21 +1,21 @@
 #! /bin/sh
 
-# Installed by Chef => graylog2::web-interface.rb
+# Installed by Chef => rackspace_graylog2::web-interface.rb
 
 ### BEGIN INIT INFO
-# Provides:          <%= node[:graylog2][:web_service_name] %>
+# Provides:          <%= node['rackspace_graylog2']['web_service_name'] %>
 # Required-Start:    $all
 # Required-Stop:     $all
 # Default-Start:     2 3 4 5
 # Default-Stop:      0 1 6
-# Short-Description: starts the <%= node[:graylog2][:web_service_name] %>
-# Description:       starts the <%= node[:graylog2][:web_service_name] %> using the <%= node[:graylog2][:web_service_name] %> control script
+# Short-Description: starts the <%= node['rackspace_graylog2']['web_service_name'] %>
+# Description:       starts the <%= node['rackspace_graylog2']['web_service_name'] %> using the <%= node['rackspace_graylog2']['web_service_name'] %> control script
 ### END INIT INFO
 
-APP=<%= node[:graylog2][:web_service_name] %>
-APP_PATH=<%= node[:graylog2][:web_home] %>
+APP=<%= node['rackspace_graylog2']['web_service_name'] %>
+APP_PATH=<%= node['rackspace_graylog2']['web_home'] %>
 NOHUP=`which nohup`
-GRAYLOG2_PID=/var/run/<%= node[:graylog2][:web_service_name] %>
+GRAYLOG2_PID=/var/run/<%= node['rackspace_graylog2']['web_service_name'] %>
 
 test -x /usr/bin/java || exit 0
 
@@ -24,7 +24,7 @@ set -e
 start() {
   echo "Starting $APP ..."
   cd $APP_PATH/bin
-  $NOHUP ./$APP -mem <%= node[:graylog2][:web_mem] %> -Dpidfile.path=$GRAYLOG2_PID &
+  $NOHUP ./$APP -mem <%= node['rackspace_graylog2']['web_mem'] %> -Dpidfile.path=$GRAYLOG2_PID &
 }
 
 stop() {

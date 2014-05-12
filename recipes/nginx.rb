@@ -16,12 +16,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-include_recipe "nginx::default"
+include_recipe 'nginx::default'
 
-template "#{node.nginx.dir}/sites-available/graylog2-web-interface.conf" do
-  source "nginx.conf.erb"
-  mode "0644"
-  notifies :restart, "service[nginx]", :delayed
+template "#{node['nginx']['dir']}/sites-available/graylog2-web-interface.conf" do
+  source 'nginx.conf.erb'
+  mode '0644'
+  notifies :restart, 'service[nginx]', :delayed
 end
 
-nginx_site "graylog2-web-interface.conf"
+nginx_site 'graylog2-web-interface.conf'

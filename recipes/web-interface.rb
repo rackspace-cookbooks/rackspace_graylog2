@@ -16,5 +16,5 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-include_recipe "java"
-include_recipe "graylog2::web-interface-only"
+include_recipe 'java'
+include_recipe 'rackspace_graylog2::web-interface-only'

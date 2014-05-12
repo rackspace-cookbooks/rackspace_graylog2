@@ -12,7 +12,7 @@
 # Description:       starts the graylog2 java server using the graylog2 control script
 ### END INIT INFO
 
-BINDIR=<%= node[:graylog2][:server_home] %>/bin
+BINDIR=<%= node['rackspace_graylog2']['server_home'] %>/bin
 NAME=graylog2-server
 DESC=graylog2-server
 
